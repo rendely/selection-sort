@@ -1,5 +1,26 @@
 function selectionSort(arr) {
-  // type your code here
+  // if length is one, return the single value
+  if (arr.length === 1) return arr
+
+  let sortedArr = [];
+  let remainingArr = arr;
+
+  while (remainingArr.length > 0) {
+    // loop through to find minumum
+    let min = arr[0];
+    for (el of arr) {
+      if (el < min) min = el;
+    }
+
+    // Remove that value from array 
+    const minIndex = remainingArr.indexOf(min);
+    sortedArr.push(min);
+    remainingArr.splice(minIndex, 1);
+
+  }
+
+  return sortedArr
+
 }
 
 if (require.main === module) {
@@ -15,6 +36,22 @@ if (require.main === module) {
   for (let i = 0; i < 100; ++i) {
     longInput.push(Math.random());
   }
+
+  const startTime = Date.now();
+  
+
+  for (let i = 0; i < 1000; i++){
+    selectionSort([3, -1, 5, 2]);
+    selectionSort(longInput);
+  }
+
+  const endTime = Date.now();
+
+  const avgTime = (endTime - startTime) / 2000;
+
+  console.log(endTime - startTime);
+  console.log("Average time:", avgTime);
+
 }
 
 module.exports = selectionSort;
